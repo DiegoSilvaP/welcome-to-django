@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark"
+        style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+        <div class="container"> <a class="navbar-brand" href="{% url 'inicio' %}">
+                <i class="fa d-inline fa-lg fa-circle-o"></i>
+                <b> BRAND</b>
+            </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+                data-target="#navbar11">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar11">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"> <a class="nav-link" href="{% url 'historia' %}">Historia</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{% url 'caracteristicas:lista' %}">Características</a> </li>
+                </ul>
+                {% if request.user.is_staff %}
+                <a href="/admin" class="btn btn-primary navbar-btn ml-md-2" >Admin</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+    <div class="">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div class="py-3 bg-info text-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center d-md-flex align-items-center">
+                    <ul class="nav d-flex justify-content-center">
+                        <li class="nav-item"> <a class="nav-link active" href="{% url 'inicio' %}">Inicio</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'caracteristicas:lista' %}">Características</a> </li>
+                    </ul> <i class="d-block fa fa-stop-circle fa-3x mx-auto text-primary"></i>
+                    <p class="mb-0 py-1">©{% now "Y" %} Brand All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>
+        $(window).on("load", function () {
+        var bot = $('#botCollapse');
+        bot.addClass('collapse in');
+        bot.css("opacity", "1");
+    });
+    </script>
+</body>
+
+</html>

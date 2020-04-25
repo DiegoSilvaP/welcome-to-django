@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+{% if caracteristica_list %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 class="display-3 mb-4 text-center">Características de Django</h1>
+    </div>
+    {% if request.user.is_staff %}
+    <div class="col-md-2">
+      <div class="col-md-4"><a href="{% url 'caracteristicas:agregar' %}" class="btn btn-secondary">Agregar característica</a></div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="py-3 text-center" >
+    <div class="container">
+      <div class="row">
+          {% for caracteristica in caracteristica_list %}
+        <div class="col-lg-4 col-md-6 p-4">
+          <h4> <b>#{{ forloop.counter }} - {{caracteristica.name}}</b> </h4>
+          <p>{{caracteristica.description}}</p>
+          {% if request.user.is_staff %}
+          <div class="row text-center">
+            <div class="col-md-4"><a href="{% url 'caracteristicas:modificar' caracteristica.id %}" class="btn btn-secondary w-100">Editar</a></div>
+            <div class="col-md-4"><a href="{% url 'admin:caracteristicas_caracteristica_change' caracteristica.id %}" class="btn btn-secondary w-100">Admin</a></div>
+            <div class="col-md-4"><a href="{% url 'caracteristicas:eliminar' caracteristica.id %}" class="btn btn-danger w-100">Eliminar</a></div>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% else %}
+
+<div class="py-5">
+  <div class="row">
+    <div class="col-md-10">
+      <h3 class="display-5 mb-4 text-center">Nada para mostrar, vuelve más tarde</h3>
+    </div>
+    {% if request.user.is_staff %}
+    <div class="col-md-2">
+      <div class="col-md-4"><a href="#" class="btn btn-secondary">Agregar característica</a></div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

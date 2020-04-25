@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+
+{% if portada %}
+<div style="height:100vh;">
+    <div class="py-5 text-center text-white h-100 align-items-center d-flex"
+        style="	background-image: url({{portada.image.url}});	background-position: center center;	background-size: cover;	background-repeat: repeat;	transform: translateY(-64px);">
+        <div class="container-fluid py-5">
+            <div class="row">
+                <div class="mx-auto col-md-6">
+                </div>
+                <div class="mx-auto col-md-6">
+                    <h1 class="display-1 mb-4">{{portada.title}}</h1>
+                    <p class="lead mb-5">{{portada.subtitle}}</p>
+                    <a class="btn btn-lg mx-1 btn-primary" href="{{portada.link}}">{{portada.link_text}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if noticia_list %}
+<h1 class="display-3 mb-4 text-center">Sección de noticias</h1>
+<div class="py-3">
+    <div class="container">
+        {% for noticia in noticia_list %}
+        {% if forloop.counter|divisibleby:2 %}
+        <div class="row my-4 d-flex justify-content-center">
+            <div class="p-0 order-2 order-lg-1 col-lg-3">
+                <img class="img-fluid d-block" src="{{noticia.image.url}}">
+            </div>
+            <div class="d-flex flex-column justify-content-center p-3 col-lg-7 order-1 order-lg-2">
+                <h3>{{noticia.title}}</h3>
+                <p><b>{{noticia.subtitle}}</b></p>
+                <p class="">{{noticia.content}}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="row my-4 d-flex justify-content-center">
+            <div class="d-flex flex-column justify-content-center p-3 col-lg-7">
+                <h3>{{noticia.title}}</h3>
+                <p><b>{{noticia.subtitle}}</b></p>
+                <p class="">{{noticia.content}}</p>
+            </div>
+            <div class="p-0 col-lg-3">
+                <img class="img-fluid d-block" src="{{noticia.image.url}}">
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        <div class="py-5">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="display-5 mb-4 text-center">Nada para mostrar, vuelve más tarde</h3>
+              </div>
+            </div>
+          </div>
+        
+    </div>
+</div>
+{% endif %}
+{% if bot.endpoint %}
+
+<p
+    style="position: fixed; z-index:999999; {{bot.vertical_position}}:10px; {{bot.horizontal_position}}:10px;">
+    <button class="btn" type="button" data-toggle="collapse"
+        data-target="#botCollapse" aria-expanded="false" aria-controls="botCollapse"> <img src="{{bot.button_icon.url}}" width="{{bot.button_size}}"/>
+    </button>
+</p>
+<div class="panel-collapse" id="botCollapse"
+    style="position: fixed; z-index:999999; {{bot.vertical_position}}:80px; {{bot.horizontal_position}}:10px; opacity: 0;">
+    <div class="card" style="box-shadow: 2px 2px 5px -3px rgba(0, 0, 0, 0.75);">
+        <div class="card-header bg-secondary text-white">
+            {{bot.name}}
+          </div>
+        <iframe src='{{bot.endpoint}}'
+            style='width: {{bot.width}}px; height: {{bot.height}}px; border-width: 0px; z-index: 9999;'></iframe>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

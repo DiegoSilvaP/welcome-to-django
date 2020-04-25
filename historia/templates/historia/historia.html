@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+{% if historia %}
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="mb-3">{{historia.title}}</h1>
+          {{historia.content}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+<div class="py-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="display-5 mb-4 text-center">Nada para mostrar, vuelve más tarde</h3>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
