@@ -87,7 +87,7 @@ def bot_custom_upload_to(instance, filename):
 
 class BotAplication(models.Model):
     name = models.CharField(max_length=160, default="Bot App", verbose_name="Nombre")
-    endpoint = models.URLField(max_length=200, null=True, blank=True, verbose_name="URL del bot", help_text="Coloca sólo el endpoint")
+    endpoint = models.URLField(max_length=200, verbose_name="URL del bot", help_text="Coloca sólo el endpoint")
     vertical_position = models.CharField(choices=VERTICAL_CHOICES, default='bottom', max_length=15, verbose_name="Posición vertical")
     horizontal_position = models.CharField(choices=HORIZONTAL_CHOICES, default='right', max_length=15, verbose_name="Posición Horizontal")
     button_icon = models.ImageField(upload_to=bot_custom_upload_to,verbose_name="Ícono", help_text="Formatos ico, jpg, png o gif. Relación de aspecto 1:1")
